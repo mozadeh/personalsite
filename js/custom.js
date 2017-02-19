@@ -1,6 +1,10 @@
 (function(){
 	'use-strict';
 
+	$(".github").click(function(e) {
+   		e.stopPropagation();
+	})
+
 
 	/* ---------------------------------------------
 	 Initializing Functions Triggered On Window Resize

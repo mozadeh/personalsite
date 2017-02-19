@@ -316,6 +316,10 @@ footer, header, hgroup, menu, nav, section, main{
 	display: block;
 }
 
+figcaption{
+	padding-top: 10px;
+}
+
 h1,
 h2,
 h3,
@@ -1828,7 +1832,7 @@ ol{
 }
 
 .single-portfolio-desc p .impo{
-	color: #505050;
+	color: black;
     font-weight: 700;
 }
 
