@@ -28,7 +28,20 @@
 	17. Color Scheme Selector
 
 ======================================================== */
-
+a.back-to-top {
+	display: none;
+	width: 60px;
+	height: 60px;
+	text-indent: -9999px;
+	position: fixed;
+	z-index: 999;
+	right: 20px;
+	bottom: 20px;
+	background: #0eb57d url("../img/up-arrow.png") no-repeat center 43%;
+	-webkit-border-radius: 30px;
+	-moz-border-radius: 30px;
+	border-radius: 30px;
+}
 
 
 /* =============================================
@@ -373,6 +386,17 @@ p{
 	color: #888888;
 	font-weight: 400;
 	margin-bottom: 0;
+}
+
+.single-blog-content p{
+	color:#666666
+}
+
+.single-blog-content b{
+	font-size: 19px;
+    display: block;
+    margin-top: 16px;
+    color: #0EB57F;
 }
 
 a{
@@ -1831,7 +1855,7 @@ ol{
 	color:#0EB57D;
 }
 
-.single-portfolio-desc p .impo{
+.impo{
 	color: black;
     font-weight: 700;
 }

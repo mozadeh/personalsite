@@ -5,7 +5,6 @@
    		e.stopPropagation();
 	})
 
-
 	/* ---------------------------------------------
 	 Initializing Functions Triggered On Window Resize
 	 --------------------------------------------- */
