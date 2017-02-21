@@ -3,7 +3,7 @@
 $name = $_POST["name"];
 $email = $_POST["email"];
 $message = $_POST["message"];
-$email_to = "mo.zadeh@mozadeh.com";
+$email_to = "mo.zadeh@berkeley.edu";
 $subject = "New Message Received";
 
 if($name != '' && $email != '' && $message != ''){
