@@ -23,6 +23,9 @@
 		<link type="text/css" rel="stylesheet" media="all" href="css/style.css">
 		<link class="color-scheme" type="text/css" rel="stylesheet" media="all" href="css/color-1.css">
 		<link type="text/css" rel="stylesheet" media="all" href="css/responsive.css">
+		
+		
+
 		<script type="text/javascript" src="js/modernizr.js"></script>
 	</head>
 	<body>
@@ -95,7 +98,7 @@
 					<div class="col l8 m8 s12 single-blog-wrapper pdl-0">
 						<div class="col s12 w-block z-depth-1 shadow-change pd-50">
 							<div class="single-blog-title">
-								The Data behind the success of "Small Ball" and Golden State Warriors
+								Machine Learning 101
 							</div>
 							<div class="single-blog-data blog-data">
 								<a href="#0" class="waves-effect"><span class="fa fa-user"></span>Mo Ghasemzadeh</a>
@@ -108,84 +111,94 @@
 								</h3>
 								<br/>
 								<p>
-									I have scraped the data from the draftexpress.com to assess data for physical and performance measurements of players drafted (first and second round of draft) from 1987 to 2014 into the NBA. Overall the most interesting insights were:
-								<br/>
-								<br/>
-								1. <span style="color: #0EB57F;font-weight:700">The average height of players is decreasing</span> as Centers are becoming smaller while point guards are becoming bigger (perhaps in line with the conclusions of many that  Basketball is becoming position-less. 
-								<br/>
-								<br/>
-								2. The speed and vertical jumping abilities have been improving over the years.
-								<br/>	
-								</p>
-								<br/>
-								<p>
-									All this leads us to believe that there is trend towards <span style="color: #0EB57F;font-weight:700">focusing more on a player’s versatility</span> and <span style="color: #0EB57F;font-weight:700">less so on his height</span>.	
+									I have described algorithms commonly used in machine learning, pros, cons along with sample code.
 								</p>
 								<br/><br/>
 								<h3>
-									Average Height of players drafted
+									Random Forest
 								</h3>
 								<br/>
 								<p>
-									On average the height of NBA players has been decreasing over time. As the data shows the average height of the NBA player has moved from 79 inches (6’7”) to 77.5 inches (6’5.5”). 
+									<iframe style="height:280px;width:100%" src="https://www.youtube.com/embed/loNcrMjYh64" frameborder="0" allowfullscreen></iframe>
 								</p>
 								<br/>
 								<p>
-									We will assess trends in height of players drafted by each position. If we do a regression for players by position we find the following coefficients:
+									<b>Best at: </b>
+									<ol>
+										<li>
+											Apt at almost any machine learning problem
+										</li>
+										<li>
+											Bioinformatics
+										</li>
+									</ol>	
 								</p>
 								<br/>
 								<p>
-									<table>
-										<tr>
-											<th>
-												Position
-											</th>
-											<th>
-												Coefficient
-											</th>	
-										</tr>
-										<tr>
-											<td>
-												Center
-											</td>
-											<td>
-												-0.07
-											</td>
-										<tr>
-										<tr>
-											<td>
-												Power Forward
-											</td>
-											<td>
-												-0.02
-											</td>
-										<tr>
-										<tr>
-											<td>
-												Small Forward
-											</td>
-											<td>
-												-0.02
-											</td>
-										<tr>
-										<tr>
-											<td>
-												Shooting Guard
-											</td>
-											<td>
-												-0.03
-											</td>
-										<tr>
-										<tr>
-											<td>
-												Point Guard
-											</td>
-											<td>
-												+0.03
-											</td>
-										<tr>		
-									</table>
+									<b>Pros: </b>
+									<ol>
+										<li>
+											Can work in parallel
+										</li>
+										<li>
+											Seldom overfits
+										</li>
+										<li>
+											Automatically handles missing values
+										</li>
+										<li>
+											No need to transform any variable
+										</li>
+										<li>
+											No need to tweak parameters
+										</li>
+										<li>
+											Can be used by almost anyone with excellent results
+										</li>
+									</ol>	
 								</p>
+								<br/>
+								<p>
+									<b>Cons: </b>
+									<ol>
+										<li>
+											Difficult to interpret
+										</li>
+										<li>
+											Weaker on regression when estimating values at the extremities of the distribution of response values
+										</li>
+										<li>
+											Biased in multiclass problems toward more frequent classes
+										</li>
+									</ol>	
+								</p>
+								<br/>
+								<p>
+									
+										import pandas as pd
+										import numpy as np
+										from sklearn.cross_validation import train_test_split
+										from sklearn.ensemble import RandomForestClassifier
+										dataset = pd.read_csv('sampledata.csv', sep=',')
+										dataset=pd.get_dummies(dataset)
+										#print(dataset)
+										X, y = dataset.iloc[:20,1:], dataset.iloc[:20,:1]
+										#print(y)
+										X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=1)
+										clf = RandomForestClassifier(n_estimators=10)
+										yt=np.ravel(y_train)
+										clf = clf.fit(X_train, yt)
+										print(X_test.iloc[:4,:])
+										print(clf.predict(X_test.iloc[:4,:]))
+										print(y_test.iloc[:4,:])
+
+										
+								</p>
+								<br/>
+								
+
+
+
 								<br/>
 								<p>
 									Each coefficient means how much on average (in inches) the height of players changes every year. For instance, Centers (on average) have be decreasing by 0.07 inches each year where as Point Guards’ height is increasing by 0.03 inches each year. Overall this show that Centers are decreasing the fastest, point guards are the only position getting taller and Small Forwards, Power forwards and shooting guards and getting slightly smaller.
