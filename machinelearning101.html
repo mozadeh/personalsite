@@ -24,9 +24,9 @@
 		<link class="color-scheme" type="text/css" rel="stylesheet" media="all" href="css/color-1.css">
 		<link type="text/css" rel="stylesheet" media="all" href="css/responsive.css">
 		
-		<script type="text/javascript" src="scripts/shCore.js"></script>
-		<script type="text/javascript" src="scripts/shBrushPython.js"></script>
-		<link type="text/css" rel="stylesheet" href="styles/shCoreDefault.css"/>
+		<script type="text/javascript" src="js/shCore.js"></script>
+		<script type="text/javascript" src="js/shBrushPython.js"></script>
+		<link type="text/css" rel="stylesheet" href="css/shCoreDefault.css"/>
 		<script type="text/javascript">SyntaxHighlighter.all();</script>
 		
 		<script type="text/javascript" src="js/modernizr.js"></script>
@@ -114,7 +114,7 @@
 								</h3>
 								<br/>
 								<p>
-									There are many machine learning algorithms, each with their own unique advantages and disadvantages. I have described algorithms commonly used in machine learning, pros, cons along with sample code. You can use this for future reference, when in doubt regarding which algorithm you should consider using. I have used information provided by John Paul Mueller, Luca Massaron and Thales Sehn Korting for this post.
+									There are many machine learning algorithms, each with their own unique advantages and disadvantages. I have described algorithms commonly used in machine learning, pros, cons along with sample code. For this post I have compiled information and videos on the web which I thought did a great job of explaining the concepts.<span class="impo">The intention of this post isn't to teach you certain algorithms but to make you familiar with some of the concepts of Machine Learning. You can also use this for future reference, when in doubt regarding which algorithm you should consider using.</span> I have used information provided by John Paul Mueller, Luca Massaron and Thales Sehn Korting for this post. I have not included Neural Networks in this post as they are quite difficult to explain in a small section within this post.
 								</p>
 								<br/><br/>
 								<section id="svm-section" class="portfolio-section">		
@@ -129,7 +129,7 @@
 
 										SVMs (linear or otherwise) inherently do binary classification. However, there are various procedures for extending them to multiclass problems. The most common methods involve transforming the problem into a set of binary classification problems, by one of two strategies:
 										<br/><br/>
-										1. One vs. the rest. For kk classes, kk binary classifiers are trained. Each determines whether an example belongs to its 'own' class versus any other class. The classifier with the largest output is taken to be the class of the example.
+										1. One vs. the rest. For K classes, K binary classifiers are trained. Each determines whether an example belongs to its 'own' class versus any other class. The classifier with the largest output is taken to be the class of the example.
 										<br/><br/>
 										2. One vs. one. A binary classifier is trained for each pair of classes. A voting procedure is used to combine the outputs.
 									</p>
@@ -175,7 +175,7 @@
 									<br/>
 									<p>
 										<b>Sample Python Code: </b>
-										<pre class="brush: python">
+										<pre class="brush: python; toolbar: false;">
 											print(__doc__)
 
 
@@ -244,88 +244,7 @@
 									</p>
 								</section>	
 
-								<section id="gbm-section" class="portfolio-section">		
-									<h3>
-										Gradient Boosting
-									</h3>
-									<br/>
-									<p>
-										<b>Explanation: </b>
-										<br/>
-										<iframe style="height:280px;width:100%" src="https://www.youtube.com/embed/0Xc9LIb_HTw" frameborder="0" allowfullscreen></iframe>.
-									</p>
-									<br/>
-									<p>
-										<b>Best at: </b>
-										<ol>
-											<li>
-												Apt at almost any machine learning problem
-											</li>
-											<li>
-												Search engines (solving the problem of learning to rank)
-											</li>
-										</ol>	
-									</p>
-									<br/>
-									<p>
-										<b>Pros: </b>
-										<ol>
-											<li>
-												It can approximate most nonlinear function
-											</li>
-											<li>
-												Best in class predictor
-											</li>
-											<li>
-												Automatically handles missing values
-											</li>
-											<li>
-												No need to transform any variable
-											</li>
-										</ol>	
-									</p>
-									<br/>
-									<p>
-										<b>Cons: </b>
-										<ol>
-											<li>
-												It can overfit if run for too many iterations
-											</li>
-											<li>
-												Sensitive to noisy data and outliers
-											</li>
-											<li>
-												Doesn’t work well without parameter tuning
-											</li>
-										</ol>	
-									</p>
-									<br/>
-									<p>
-										<b>Sample Python Code: </b>
-										<pre class="brush: python">
-											from sklearn.datasets import make_hastie_10_2
-											from sklearn.ensemble import GradientBoostingClassifier
 
-											X, y = make_hastie_10_2(random_state=0)
-											X_train, X_test = X[:2000], X[2000:]
-											y_train, y_test = y[:2000], y[2000:]
-
-											clf = GradientBoostingClassifier(n_estimators=100, learning_rate=1.0,
-											    max_depth=1, random_state=0).fit(X_train, y_train)
-											#The number of weak learners (i.e. regression trees) is controlled by the parameter n_estimators; The size of each tree can be controlled either by setting the tree depth via max_depth or by setting the number of leaf nodes via max_leaf_nodes. The learning_rate is a hyper-parameter in the range (0.0, 1.0] that controls overfitting via shrinkage 
-											
-											clf.score(X_test, y_test)  
-
-										</pre>
-											
-									</p>
-									<br/>
-									
-
-									</p>
-								</section>	
-								
-								
 								<section id="randomforest-section" class="portfolio-section">		
 									<h3>
 										Random Forest
@@ -390,7 +309,7 @@
 									<br/>
 									<p>
 										<b>Sample Python Code: </b>
-										<pre class="brush: python">
+										<pre class="brush: python; toolbar: false;">
 											import pandas as pd
 											import numpy as np
 											from sklearn.cross_validation import train_test_split
@@ -421,6 +340,1012 @@
 											clf = clf.fit(X_train, yt)
 											y_predict=clf.predict(X_test)
 											print("Rsquared for Random Forest: ",r2_score(y_test, y_predict))
+										</pre>
+											
+									</p>
+									<br/>
+									
+
+									</p>
+								</section>
+
+								<section id="gbm-section" class="portfolio-section">		
+									<h3>
+										Gradient Boosting
+									</h3>
+									<br/>
+									<p>
+										<b>Explanation: </b>
+										<br/>
+										<iframe style="height:280px;width:100%" src="https://www.youtube.com/embed/0Xc9LIb_HTw" frameborder="0" allowfullscreen></iframe>.
+									</p>
+									<br/>
+									<p>
+										<b>Best at: </b>
+										<ol>
+											<li>
+												Apt at almost any machine learning problem
+											</li>
+											<li>
+												Search engines (solving the problem of learning to rank)
+											</li>
+										</ol>	
+									</p>
+									<br/>
+									<p>
+										<b>Pros: </b>
+										<ol>
+											<li>
+												It can approximate most nonlinear function
+											</li>
+											<li>
+												Best in class predictor
+											</li>
+											<li>
+												Automatically handles missing values
+											</li>
+											<li>
+												No need to transform any variable
+											</li>
+										</ol>	
+									</p>
+									<br/>
+									<p>
+										<b>Cons: </b>
+										<ol>
+											<li>
+												It can overfit if run for too many iterations
+											</li>
+											<li>
+												Sensitive to noisy data and outliers
+											</li>
+											<li>
+												Doesn't work well without parameter tuning
+											</li>
+										</ol>	
+									</p>
+									<br/>
+									<p>
+										<b>Sample Python Code: </b>
+										<pre class="brush: python; toolbar: false;">
+											from sklearn.datasets import make_hastie_10_2
+											from sklearn.ensemble import GradientBoostingClassifier
+
+											X, y = make_hastie_10_2(random_state=0)
+											X_train, X_test = X[:2000], X[2000:]
+											y_train, y_test = y[:2000], y[2000:]
+
+											clf = GradientBoostingClassifier(n_estimators=100, learning_rate=1.0,
+											    max_depth=1, random_state=0).fit(X_train, y_train)
+											#The number of weak learners (i.e. regression trees) is controlled by the parameter n_estimators; The size of each tree can be controlled either by setting the tree depth via max_depth or by setting the number of leaf nodes via max_leaf_nodes. The learning_rate is a hyper-parameter in the range (0.0, 1.0] that controls overfitting via shrinkage 
+
+											clf.score(X_test, y_test)  
+
+										</pre>
+											
+									</p>
+									<br/>
+									
+
+									</p>
+								</section>	
+								
+								
+								
+								<section id="adaboost-section" class="portfolio-section">		
+									<h3>
+										Adaboost (Adaptive Boost)
+									</h3>
+									<br/>
+									<p>
+										<b>Explanation: </b>
+										<br/>
+										<iframe style="height:280px;width:100%" src="https://www.youtube.com/embed/ix6IvwbVpw0" frameborder="0" allowfullscreen></iframe>
+										<br/><br/>
+										Zhaojun Zhang, a Software Engineer from Coursera, describes the differences between Adaboost and Gradient boosting quite well. As he mentions Both methods use a set of weak learners. They try to boost these weak learners into a strong learner. I assume that the strong learner is additive by the weak learners.
+										<br/><br/>
+										Gradient boosting generates learners during the learning process. It build first learner to predict the values/labels of samples, and calculate the loss (the difference between the outcome of the first learner and the real value). It will build a second learner to predict the loss after the first step. The step continues to learn the third, fourth … until certain threshold.
+										<br/><br/>
+										Adaboost requires users specify a set of weak learners (alternatively, it will randomly generate a set of weak learner before the real learning process). It will learn the weights of how to add these learners to be a strong learner. The weight of each learner is learned by whether it predicts a sample correctly or not. If a learner is mispredict a sample, the weight of the learner is reduced a bit. It will repeat such process until converge.
+									</p>
+									<br/>
+									<p>
+										<b>Best at: </b>
+										<ol>
+											<li>
+												Face detection
+											</li>
+										</ol>	
+									</p>
+									<br/>
+									<p>
+										<b>Pros: </b>
+										<ol>
+											<li>
+												Automatically handles missing values
+											</li>
+											<li>
+												No need to transform any variable
+											</li>
+											<li>
+												It doesn’t overfit easily
+											</li>
+											<li>
+												Few parameters to tweak
+											</li>
+											<li>
+												It can leverage many different weak-learners
+											</li>
+										</ol>	
+									</p>
+									<br/>
+									<p>
+										<b>Cons: </b>
+										<ol>
+											<li>
+												Sensitive to noisy data and outliers
+											</li>
+											<li>
+												Never the best in class predictions
+											</li>
+										</ol>	
+									</p>
+									<br/>
+									<p>
+										<b>Sample Python Code: </b>
+										<pre class="brush: python; toolbar: false;">
+											# AdaBoost Classification
+											import pandas
+											from sklearn import model_selection
+											from sklearn.ensemble import AdaBoostClassifier
+											url = "https://archive.ics.uci.edu/ml/machine-learning-databases/pima-indians-diabetes/pima-indians-diabetes.data"
+											names = ['preg', 'plas', 'pres', 'skin', 'test', 'mass', 'pedi', 'age', 'class']
+											dataframe = pandas.read_csv(url, names=names)
+											array = dataframe.values
+											X = array[:,0:8]
+											Y = array[:,8]
+											seed = 7
+											num_trees = 30
+											kfold = model_selection.KFold(n_splits=10, random_state=seed)
+											model = AdaBoostClassifier(n_estimators=num_trees, random_state=seed)
+											results = model_selection.cross_val_score(model, X, Y, cv=kfold)
+											print(results.mean())
+										</pre>
+											
+									</p>
+									<br/>
+									
+
+									</p>
+								</section>
+
+
+								<section id="bayes-section" class="portfolio-section">		
+									<h3>
+										Naive Bayes
+									</h3>
+									<br/>
+									<p>
+										<b>Explanation: </b>
+										<br/>
+										<iframe style="height:280px;width:100%" src="https://www.youtube.com/embed/H7IlFC5wbjk" frameborder="0" allowfullscreen></iframe>
+									</p>
+									<br/>
+									<p>
+										<b>Best at: </b>
+										<ol>
+											<li>
+												Face recognition
+											</li>
+											<li>
+												Sentiment analysis
+											</li>
+											<li>
+												Spam detection
+											</li>
+											<li>
+												Text classification
+											</li>
+										</ol>	
+									</p>
+									<br/>
+									<p>
+										<b>Pros: </b>
+										<ol>
+											<li>
+												Easy and fast to implement, doesn’t require too much memory and can be used for online learning
+											</li>
+											<li>
+												Easy to understand
+											</li>
+											<li>
+												Takes into account prior knowledge
+											</li>
+										</ol>	
+									</p>
+									<br/>
+									<p>
+										<b>Cons: </b>
+										<ol>
+											<li>
+												Strong and unrealistic feature independence assumptions
+											</li>
+											<li>
+												Fails estimating rare occurrences
+											</li>
+											<li>
+												Suffers from irrelevant features
+											</li>
+										</ol>	
+									</p>
+									<br/>
+									<p>
+										<b>Sample Python Code: </b>
+										<pre class="brush: python; toolbar: false;">
+											#Email Spam Detection
+											#You will need a folder which included spam only email, we'll call it Spam here
+											#You will also need a folder which included non-spam only email, we'll call it Ham
+
+											import os
+											import io
+											import numpy
+											from pandas import DataFrame
+											from sklearn.feature_extraction.text import CountVectorizer
+											from sklearn.naive_bayes import MultinomialNB
+
+											def readFiles(path):
+											    for root, dirnames, filenames in os.walk(path):
+											        for filename in filenames:
+											            path = os.path.join(root, filename)
+
+											            inBody = False
+											            lines = []
+											            f = io.open(path, 'r', encoding='latin1')
+											            for line in f:
+											                if inBody:
+											                    lines.append(line)
+											                elif line == '\n':
+											                    inBody = True
+											            f.close()
+											            message = '\n'.join(lines)
+											            yield path, message
+
+
+											def dataFrameFromDirectory(path, classification):
+											    rows = []
+											    index = []
+											    for filename, message in readFiles(path):
+											        rows.append({'message': message, 'class': classification})
+											        index.append(filename)
+
+											    return DataFrame(rows, index=index)
+
+											data = DataFrame({'message': [], 'class': []})
+
+											data = data.append(dataFrameFromDirectory('e:/directory/spam', 'spam'))
+											data = data.append(dataFrameFromDirectory('e:/directory/ham', 'ham'))
+											vectorizer = CountVectorizer()
+											counts = vectorizer.fit_transform(data['message'].values)
+
+											classifier = MultinomialNB()
+											targets = data['class'].values
+											classifier.fit(counts, targets)
+											examples = ['Free Viagra now!!!', "Hi Bob, how about a game of golf tomorrow?"]
+											example_counts = vectorizer.transform(examples)
+											predictions = classifier.predict(example_counts)
+											predictions
+										</pre>
+											
+									</p>
+									<br/>
+									
+
+									</p>
+								</section>
+
+
+								<section id="knn-section" class="portfolio-section">		
+									<h3>
+										K-nearest Neighbors
+									</h3>
+									<br/>
+									<p>
+										<b>Explanation: </b>
+										<br/>
+										<iframe style="height:280px;width:100%" src="https://www.youtube.com/embed/UqYde-LULfs" frameborder="0" allowfullscreen></iframe>
+									</p>
+									<br/>
+									<p>
+										<b>Best at: </b>
+										<ol>
+											<li>
+												Computer vision
+											</li>
+											<li>
+												Multilabel tagging
+											</li>
+											<li>
+												Recommender systems
+											</li>
+											<li>
+												Spell checking problems
+											</li>
+										</ol>	
+									</p>
+									<br/>
+									<p>
+										<b>Pros: </b>
+										<ol>
+											<li>
+												Fast, lazy training
+											</li>
+											<li>
+												Can naturally handle extreme multiclass problems (like tagging text)
+											</li>
+										</ol>	
+									</p>
+									<br/>
+									<p>
+										<b>Cons: </b>
+										<ol>
+											<li>
+												Slow and cumbersome in the predicting phase
+											</li>
+											<li>
+												Can fail to predict correctly due to the curse of dimensionality
+											</li>
+										</ol>	
+									</p>
+									<br/>
+									<p>
+										<b>Sample Python Code: </b>
+										<pre class="brush: python; toolbar: false;">
+											X = [[0], [1], [2], [3]]
+											y = [0, 0, 1, 1]
+											from sklearn.neighbors import KNeighborsClassifier
+											neigh = KNeighborsClassifier(n_neighbors=3)
+											neigh.fit(X, y) 
+
+											print(neigh.predict([[1.1]]))
+											#[0]
+											print(neigh.predict_proba([[0.9]]))
+											#[[ 0.66666667  0.33333333]]
+										</pre>
+											
+									</p>
+									<br/>
+									
+
+									</p>
+								</section>
+
+
+
+								<section id="svd-section" class="portfolio-section">		
+									<h3>
+										SVD (Singular Value Decomposition)
+									</h3>
+									<br/>
+									<p>
+										<b>Intuitive Explanation: </b>
+										<br/>
+										<iframe style="height:280px;width:100%" src="https://www.youtube.com/embed/CQbbsKK1kus" frameborder="0" allowfullscreen></iframe>
+										<b>Mathematical Explanation: </b>
+										<br/>
+										<iframe style="height:280px;width:100%" src="https://www.youtube.com/embed/P5mlg91as1c" frameborder="0" allowfullscreen></iframe>
+									</p>
+									<br/>
+									<p>
+										<b>Best at: </b>
+										<ol>
+											<li>
+												Recommender systems
+											</li>
+										</ol>	
+									</p>
+									<br/>
+									<p>
+										<b>Pros: </b>
+										<ol>
+											<li>
+												Can restructure data in a meaningful way
+											</li>
+										</ol>	
+									</p>
+									<br/>
+									<p>
+										<b>Cons: </b>
+										<ol>
+											<li>
+												Difficult to understand why data has been restructured in a certain way
+											</li>
+										</ol>	
+									</p>
+									<br/>
+									<p>
+										<b>Sample Python Code: </b>
+										<pre class="brush: python; toolbar: false;">
+											from numpy import *
+											import operator
+											from os import listdir
+											import matplotlib
+											import matplotlib.pyplot as plt
+											import pandas as pd
+											from numpy.linalg import *
+											from scipy.stats.stats import pearsonr
+											from numpy import linalg as la
+
+											from sklearn.datasets import load_iris
+
+											 
+											# load data points
+											raw_data = load_iris().data
+											samples,features = shape(raw_data)
+											 
+											#normalize and remove mean
+											data = mat(raw_data[:,:4])
+											 
+											def svd(data, S=2):
+											     
+											    #calculate SVD
+											    U, s, V = linalg.svd( data )
+											    Sig = mat(eye(S)*s[:S])
+											    #tak out columns you don't need
+											    newdata = U[:,:S]
+											     
+											    # this line is used to retrieve dataset 
+											    #~ new = U[:,:2]*Sig*V[:2,:]
+											 
+											    fig = plt.figure()
+											    ax = fig.add_subplot(1,1,1)
+											    colors = ['blue','red','black']
+											    for i in xrange(samples):
+											        ax.scatter(newdata[i,0],newdata[i,1], color= colors[int(raw_data[i,-1])])
+											    plt.xlabel('SVD1')
+											    plt.ylabel('SVD2')
+											    plt.show()
+											         
+											 
+											svd(data,2)
+										</pre>
+											
+									</p>
+									<br/>
+									
+
+									</p>
+								</section>
+
+
+								<section id="pca-section" class="portfolio-section">		
+									<h3>
+										PCA (Principle Component Analysis)
+									</h3>
+									<br/>
+									<p>
+										<b>Explanation: </b>
+										<br/>
+										<iframe style="height:280px;width:100%" src="https://www.youtube.com/embed/_UVHneBUBW0" frameborder="0" allowfullscreen></iframe>
+									</p>
+									<br/>
+									<p>
+										<b>Best at: </b>
+										<ol>
+											<li>
+												Removing collinearity
+											</li>
+											<li>
+												Reducing dimensions of the dataset
+											</li>
+
+										</ol>	
+									</p>
+									<br/>
+									<p>
+										<b>Pros: </b>
+										<ol>
+											<li>
+												Can reduce data dimensionality
+											</li>
+
+										</ol>	
+									</p>
+									<br/>
+									<p>
+										<b>Cons: </b>
+										<ol>
+											<li>
+												Implies strong linear assumptions (components are a weighted summations of features)
+											</li>
+										</ol>	
+									</p>
+									<br/>
+									<p>
+										<b>Sample Python Code: </b>
+										<pre class="brush: python; toolbar: false;">
+											print(__doc__)
+
+											# PCA example with Iris Data-set
+											# Code source: Gaël Varoquaux
+											# License: BSD 3 clause
+
+											import numpy as np
+											import matplotlib.pyplot as plt
+											from mpl_toolkits.mplot3d import Axes3D
+
+
+											from sklearn import decomposition
+											from sklearn import datasets
+
+											np.random.seed(5)
+
+											centers = [[1, 1], [-1, -1], [1, -1]]
+											iris = datasets.load_iris()
+											X = iris.data
+											y = iris.target
+
+											fig = plt.figure(1, figsize=(4, 3))
+											plt.clf()
+											ax = Axes3D(fig, rect=[0, 0, .95, 1], elev=48, azim=134)
+
+											plt.cla()
+											pca = decomposition.PCA(n_components=3)
+											pca.fit(X)
+											X = pca.transform(X)
+
+											for name, label in [('Setosa', 0), ('Versicolour', 1), ('Virginica', 2)]:
+											    ax.text3D(X[y == label, 0].mean(),
+											              X[y == label, 1].mean() + 1.5,
+											              X[y == label, 2].mean(), name,
+											              horizontalalignment='center',
+											              bbox=dict(alpha=.5, edgecolor='w', facecolor='w'))
+											# Reorder the labels to have colors matching the cluster results
+											y = np.choose(y, [1, 2, 0]).astype(np.float)
+											ax.scatter(X[:, 0], X[:, 1], X[:, 2], c=y, cmap=plt.cm.spectral)
+
+											ax.w_xaxis.set_ticklabels([])
+											ax.w_yaxis.set_ticklabels([])
+											ax.w_zaxis.set_ticklabels([])
+
+											plt.show()
+
+										</pre>
+											
+									</p>
+									<br/>
+									
+
+									</p>
+								</section>
+
+
+								<section id="cb-section" class="portfolio-section">		
+									<h3>
+										CF (Collaborative Filtering)
+									</h3>
+									<br/>
+									<p>
+										<b>Explanation: </b>
+										<br/>
+										<iframe style="height:280px;width:100%" src="https://www.youtube.com/embed/h9gpufJFF-0" frameborder="0" allowfullscreen></iframe>
+									</p>
+									<br/>
+									<p>
+										<b>Best at: </b>
+										<ol>
+											<li>
+												Recommender systems
+											</li>
+
+										</ol>	
+									</p>
+									<br/>
+									<p>
+										<b>Pros: </b>
+										<ol>
+											<li>
+												No Feature Selection required as CF does not require content information about neither users or items to be machine-recognizable
+											</li>
+											<li>
+												Can suggest serendipitous items by observing similar-minded peoples behavior
+											</li>
+
+										</ol>	
+									</p>
+									<br/>
+									<p>
+										<b>Cons: </b>
+										<ol>
+											<li>
+												CF systems are not content aware meaning that information about items are not considered when they produce recommendation
+											</li>
+											<li>
+												User/rating matrix is sparse, can be hard to find users who have rated similar items
+											</li>
+											<li>
+												Cannot recommend an unrated item and tends to be biased towards popular items
+											</li>
+
+										</ol>	
+									</p>
+									<br/>
+								</section>
+
+
+								
+
+								<section id="km-section" class="portfolio-section">		
+									<h3>
+										K-means Clustering
+									</h3>
+									<br/>
+									<p>
+										<b>Explanation: </b>
+										<br/>
+										<iframe style="height:280px;width:100%" src="https://www.youtube.com/embed/_aWzGGNrcic" frameborder="0" allowfullscreen></iframe>
+									</p>
+									<br/>
+									<p>
+										<b>Best at: </b>
+										<ol>
+											<li>
+												Segmentation
+											</li>
+
+										</ol>	
+									</p>
+									<br/>
+									<p>
+										<b>Pros: </b>
+										<ol>
+											<li>
+												Fast in finding clusters
+											</li>
+											<li>
+												Can detect outliers in multiple dimensions
+											</li>
+
+										</ol>	
+									</p>
+									<br/>
+									<p>
+										<b>Cons: </b>
+										<ol>
+											<li>
+												Suffers from multicollinearity
+											</li>
+											<li>
+												Clusters are spherical, can’t detect groups of other shape
+											</li>
+											<li>
+												Unstable solutions, depends on initialization
+											</li>
+
+										</ol>	
+									</p>
+									
+									<br/>
+									<p>
+										<b>Sample Python Code: </b>
+										<pre class="brush: python; toolbar: false;">
+											print(__doc__)
+
+
+											# Code source: Gaël Varoquaux
+											# Modified for documentation by Jaques Grobler
+											# License: BSD 3 clause
+
+											import numpy as np
+											import matplotlib.pyplot as plt
+											from mpl_toolkits.mplot3d import Axes3D
+
+
+											from sklearn.cluster import KMeans
+											from sklearn import datasets
+
+											np.random.seed(5)
+
+											centers = [[1, 1], [-1, -1], [1, -1]]
+											iris = datasets.load_iris()
+											X = iris.data
+											y = iris.target
+
+											estimators = {'k_means_iris_3': KMeans(n_clusters=3),
+											              'k_means_iris_8': KMeans(n_clusters=8),
+											              'k_means_iris_bad_init': KMeans(n_clusters=3, n_init=1,
+											                                              init='random')}
+
+
+											fignum = 1
+											for name, est in estimators.items():
+											    fig = plt.figure(fignum, figsize=(4, 3))
+											    plt.clf()
+											    ax = Axes3D(fig, rect=[0, 0, .95, 1], elev=48, azim=134)
+
+											    plt.cla()
+											    est.fit(X)
+											    labels = est.labels_
+
+											    ax.scatter(X[:, 3], X[:, 0], X[:, 2], c=labels.astype(np.float))
+
+											    ax.w_xaxis.set_ticklabels([])
+											    ax.w_yaxis.set_ticklabels([])
+											    ax.w_zaxis.set_ticklabels([])
+											    ax.set_xlabel('Petal width')
+											    ax.set_ylabel('Sepal length')
+											    ax.set_zlabel('Petal length')
+											    fignum = fignum + 1
+
+											# Plot the ground truth
+											fig = plt.figure(fignum, figsize=(4, 3))
+											plt.clf()
+											ax = Axes3D(fig, rect=[0, 0, .95, 1], elev=48, azim=134)
+
+											plt.cla()
+
+											for name, label in [('Setosa', 0),
+											                    ('Versicolour', 1),
+											                    ('Virginica', 2)]:
+											    ax.text3D(X[y == label, 3].mean(),
+											              X[y == label, 0].mean() + 1.5,
+											              X[y == label, 2].mean(), name,
+											              horizontalalignment='center',
+											              bbox=dict(alpha=.5, edgecolor='w', facecolor='w'))
+											# Reorder the labels to have colors matching the cluster results
+											y = np.choose(y, [1, 2, 0]).astype(np.float)
+											ax.scatter(X[:, 3], X[:, 0], X[:, 2], c=y)
+
+											ax.w_xaxis.set_ticklabels([])
+											ax.w_yaxis.set_ticklabels([])
+											ax.w_zaxis.set_ticklabels([])
+											ax.set_xlabel('Petal width')
+											ax.set_ylabel('Sepal length')
+											ax.set_zlabel('Petal length')
+											plt.show()
+
+										</pre>
+											
+									</p>
+									<br/>
+									
+
+									</p>
+								</section>
+
+
+								<section id="logr-section" class="portfolio-section">		
+									<h3>
+										Logistic Regression
+									</h3>
+									<br/>
+									<p>
+										<b>Explanation: </b>
+										<br/>
+										<iframe style="height:280px;width:100%" src="https://www.youtube.com/embed/gNhogKJ_q7U" frameborder="0" allowfullscreen></iframe>
+									</p>
+									<br/>
+									<p>
+										<b>Best at: </b>
+										<ol>
+											<li>
+												Ordering results by probability
+											</li>
+											<li>
+												Modelling marketing responses
+											</li>
+
+										</ol>	
+									</p>
+									<br/>
+									<p>
+										<b>Pros: </b>
+										<ol>
+											<li>
+												Simple to understand and explain
+											</li>
+											<li>
+												It seldom overfits
+											</li>
+											<li>
+												Using L1 & L2 regularization is effective in feature selection
+											</li>
+											<li>
+												Fast to train
+											</li>
+											<li>
+												Easy to train on big data thanks to its stochastic version
+											</li>
+
+										</ol>	
+									</p>
+									<br/>
+									<p>
+										<b>Cons: </b>
+										<ol>
+											<li>
+												You have to work hard to make it fit nonlinear functions
+											</li>
+											<li>
+												Can suffer from outliers
+											</li>
+										</ol>	
+									</p>
+									
+									<br/>
+									<p>
+										<b>Sample Python Code: </b>
+										<pre class="brush: python; toolbar: false;">
+											print(__doc__)
+
+
+											# Code source: Gaël Varoquaux
+											# Modified for documentation by Jaques Grobler
+											# License: BSD 3 clause
+
+											import numpy as np
+											import matplotlib.pyplot as plt
+											from sklearn import linear_model, datasets
+
+											# import some data to play with
+											iris = datasets.load_iris()
+											X = iris.data[:, :2]  # we only take the first two features.
+											Y = iris.target
+
+											h = .02  # step size in the mesh
+
+											logreg = linear_model.LogisticRegression(C=1e5)
+
+											# we create an instance of Neighbours Classifier and fit the data.
+											logreg.fit(X, Y)
+
+											# Plot the decision boundary. For that, we will assign a color to each
+											# point in the mesh [x_min, x_max]x[y_min, y_max].
+											x_min, x_max = X[:, 0].min() - .5, X[:, 0].max() + .5
+											y_min, y_max = X[:, 1].min() - .5, X[:, 1].max() + .5
+											xx, yy = np.meshgrid(np.arange(x_min, x_max, h), np.arange(y_min, y_max, h))
+											Z = logreg.predict(np.c_[xx.ravel(), yy.ravel()])
+
+											# Put the result into a color plot
+											Z = Z.reshape(xx.shape)
+											plt.figure(1, figsize=(4, 3))
+											plt.pcolormesh(xx, yy, Z, cmap=plt.cm.Paired)
+
+											# Plot also the training points
+											plt.scatter(X[:, 0], X[:, 1], c=Y, edgecolors='k', cmap=plt.cm.Paired)
+											plt.xlabel('Sepal length')
+											plt.ylabel('Sepal width')
+
+											plt.xlim(xx.min(), xx.max())
+											plt.ylim(yy.min(), yy.max())
+											plt.xticks(())
+											plt.yticks(())
+
+											plt.show()
+
+										</pre>
+											
+									</p>
+									<br/>
+									
+
+									</p>
+								</section>
+
+
+								<section id="linr-section" class="portfolio-section">		
+									<h3>
+										Linear Regression
+									</h3>
+									<br/>
+									<p>
+										<b>Explanation: </b>
+										<br/>
+										<iframe style="height:280px;width:100%" src="https://www.youtube.com/embed/zPG4NjIkCjc" frameborder="0" allowfullscreen></iframe>
+									</p>
+									<br/>
+									<p>
+										<b>Best at: </b>
+										<ol>
+											<li>
+												Baseline predictions
+											</li>
+											<li>
+												Econometric predictions
+											</li>
+											<li>
+												Modelling marketing responses
+											</li>
+
+										</ol>	
+									</p>
+									<br/>
+									<p>
+										<b>Pros: </b>
+										<ol>
+											<li>
+												Simple to understand and explain
+											</li>
+											<li>
+												It seldom overfits
+											</li>
+											<li>
+												Using L1 & L2 regularization is effective in feature selection
+											</li>
+											<li>
+												Fast to train
+											</li>
+											<li>
+												Easy to train on big data thanks to its stochastic version
+											</li>
+
+										</ol>	
+									</p>
+									<br/>
+									<p>
+										<b>Cons: </b>
+										<ol>
+											<li>
+												You have to work hard to make it fit nonlinear functions
+											</li>
+											<li>
+												Can suffer from outliers
+											</li>
+										</ol>	
+									</p>
+									
+									<br/>
+									<p>
+										<b>Sample Python Code: </b>
+										<pre class="brush: python; toolbar: false;">
+											print(__doc__)
+
+
+											# Code source: Jaques Grobler
+											# License: BSD 3 clause
+
+
+											import matplotlib.pyplot as plt
+											import numpy as np
+											from sklearn import datasets, linear_model
+
+											# Load the diabetes dataset
+											diabetes = datasets.load_diabetes()
+
+
+											# Use only one feature
+											diabetes_X = diabetes.data[:, np.newaxis, 2]
+
+											# Split the data into training/testing sets
+											diabetes_X_train = diabetes_X[:-20]
+											diabetes_X_test = diabetes_X[-20:]
+
+											# Split the targets into training/testing sets
+											diabetes_y_train = diabetes.target[:-20]
+											diabetes_y_test = diabetes.target[-20:]
+
+											# Create linear regression object
+											regr = linear_model.LinearRegression()
+
+											# Train the model using the training sets
+											regr.fit(diabetes_X_train, diabetes_y_train)
+
+											# The coefficients
+											print('Coefficients: \n', regr.coef_)
+											# The mean squared error
+											print("Mean squared error: %.2f"
+											      % np.mean((regr.predict(diabetes_X_test) - diabetes_y_test) ** 2))
+											# Explained variance score: 1 is perfect prediction
+											print('Variance score: %.2f' % regr.score(diabetes_X_test, diabetes_y_test))
+
+											# Plot outputs
+											plt.scatter(diabetes_X_test, diabetes_y_test,  color='black')
+											plt.plot(diabetes_X_test, regr.predict(diabetes_X_test), color='blue',
+											         linewidth=3)
+
+											plt.xticks(())
+											plt.yticks(())
+
+											plt.show()
 										</pre>
 											
 									</p>
@@ -482,6 +1407,17 @@
 							<div class="category-content">
 								<a href="#0" onclick=$('#svm-section').animatescroll();>Support Vector Machine</a>
 								<a href="#0" onclick=$('#randomforest-section').animatescroll();>Random Forest</a>
+								<a href="#0" onclick=$('#gbm-section').animatescroll();>Gradient Boosting</a>
+								<a href="#0" onclick=$('#adaboost-section').animatescroll();>Adaboost (Adaptive Boost)</a>
+								<a href="#0" onclick=$('#bayes-section').animatescroll();>Naive Bayes</a>
+								<a href="#0" onclick=$('#knn-section').animatescroll();>K-nearest Neighbors</a>
+								<a href="#0" onclick=$('#svd-section').animatescroll();>SVD</a>
+								<a href="#0" onclick=$('#pca-section').animatescroll();>PCA</a>
+								<a href="#0" onclick=$('#cb-section').animatescroll();>Collaborative Filtering</a>
+								<a href="#0" onclick=$('#km-section').animatescroll();>K-means Clustering</a>
+								<a href="#0" onclick=$('#logr-section').animatescroll();>Logistic Regression</a>
+								<a href="#0" onclick=$('#linr-section').animatescroll();>Linear Regression</a>
+
 							</div>
 						</div>
 						<!-- <div class="col s12 single-sidebar w-block z-depth-1 shadow-change pdt-30 pdr-30 pdb-40 pdl-30">
