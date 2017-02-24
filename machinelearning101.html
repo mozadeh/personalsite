@@ -24,8 +24,11 @@
 		<link class="color-scheme" type="text/css" rel="stylesheet" media="all" href="css/color-1.css">
 		<link type="text/css" rel="stylesheet" media="all" href="css/responsive.css">
 		
+		<script type="text/javascript" src="scripts/shCore.js"></script>
+		<script type="text/javascript" src="scripts/shBrushPython.js"></script>
+		<link type="text/css" rel="stylesheet" href="styles/shCoreDefault.css"/>
+		<script type="text/javascript">SyntaxHighlighter.all();</script>
 		
-
 		<script type="text/javascript" src="js/modernizr.js"></script>
 	</head>
 	<body>
@@ -98,7 +101,7 @@
 					<div class="col l8 m8 s12 single-blog-wrapper pdl-0">
 						<div class="col s12 w-block z-depth-1 shadow-change pd-50">
 							<div class="single-blog-title">
-								Machine Learning 101
+								Machine Learning Algorithms - Quick Reference
 							</div>
 							<div class="single-blog-data blog-data">
 								<a href="#0" class="waves-effect"><span class="fa fa-user"></span>Mo Ghasemzadeh</a>
@@ -111,235 +114,323 @@
 								</h3>
 								<br/>
 								<p>
-									I have described algorithms commonly used in machine learning, pros, cons along with sample code.
+									There are many machine learning algorithms, each with their own unique advantages and disadvantages. I have described algorithms commonly used in machine learning, pros, cons along with sample code. You can use this for future reference, when in doubt regarding which algorithm you should consider using. I have used information provided by John Paul Mueller, Luca Massaron and Thales Sehn Korting for this post.
 								</p>
 								<br/><br/>
-								<h3>
-									Random Forest
-								</h3>
-								<br/>
-								<p>
-									<iframe style="height:280px;width:100%" src="https://www.youtube.com/embed/loNcrMjYh64" frameborder="0" allowfullscreen></iframe>
-								</p>
-								<br/>
-								<p>
-									<b>Best at: </b>
-									<ol>
-										<li>
-											Apt at almost any machine learning problem
-										</li>
-										<li>
-											Bioinformatics
-										</li>
-									</ol>	
-								</p>
-								<br/>
-								<p>
-									<b>Pros: </b>
-									<ol>
-										<li>
-											Can work in parallel
-										</li>
-										<li>
-											Seldom overfits
-										</li>
-										<li>
-											Automatically handles missing values
-										</li>
-										<li>
-											No need to transform any variable
-										</li>
-										<li>
-											No need to tweak parameters
-										</li>
-										<li>
-											Can be used by almost anyone with excellent results
-										</li>
-									</ol>	
-								</p>
-								<br/>
-								<p>
-									<b>Cons: </b>
-									<ol>
-										<li>
-											Difficult to interpret
-										</li>
-										<li>
-											Weaker on regression when estimating values at the extremities of the distribution of response values
-										</li>
-										<li>
-											Biased in multiclass problems toward more frequent classes
-										</li>
-									</ol>	
-								</p>
-								<br/>
-								<p>
+								<section id="svm-section" class="portfolio-section">		
+									<h3>
+										Support Vector Machines
+									</h3>
+									<br/>
+									<p>
+										<b>Explanation: </b>
+										<br/>
+										<iframe style="height:280px;width:100%" src="https://www.youtube.com/embed/1NxnPkZM9bc" frameborder="0" allowfullscreen></iframe>
+
+										SVMs (linear or otherwise) inherently do binary classification. However, there are various procedures for extending them to multiclass problems. The most common methods involve transforming the problem into a set of binary classification problems, by one of two strategies:
+										<br/><br/>
+										1. One vs. the rest. For kk classes, kk binary classifiers are trained. Each determines whether an example belongs to its 'own' class versus any other class. The classifier with the largest output is taken to be the class of the example.
+										<br/><br/>
+										2. One vs. one. A binary classifier is trained for each pair of classes. A voting procedure is used to combine the outputs.
+									</p>
+									<br/>
+									<p>
+										<b>Best at: </b>
+										<ol>
+											<li>
+												Character recognition
+											</li>
+											<li>
+												Image recognition
+											</li>
+											<li>
+												Text classification
+											</li>
+										</ol>	
+									</p>
+									<br/>
+									<p>
+										<b>Pros: </b>
+										<ol>
+											<li>
+												Automatic nonlinear feature creation
+											</li>
+											<li>
+												Can approximate complex nonlinear functions
+											</li>
+										</ol>	
+									</p>
+									<br/>
+									<p>
+										<b>Cons: </b>
+										<ol>
+											<li>
+												Difficult to interpret when applying nonlinear kernels
+											</li>
+											<li>
+												Suffers from too many examples, after 10,000 examples it starts taking too long to train
+											</li>
+										</ol>	
+									</p>
+									<br/>
+									<p>
+										<b>Sample Python Code: </b>
+										<pre class="brush: python">
+											print(__doc__)
+
+
+											# Author: Gael Varoquaux "gael dot varoquaux at normalesup dot org"
+											# License: BSD 3 clause
+
+											# Standard scientific Python imports
+											import matplotlib.pyplot as plt
+
+											# Import datasets, classifiers and performance metrics
+											from sklearn import datasets, svm, metrics
+
+											# The digits dataset
+											digits = datasets.load_digits()
+
+											%matplotlib inline
+											plt.ion()
+
+											# The data that we are interested in is made of 8x8 images of digits, let's
+											# have a look at the first 4 images, stored in the `images` attribute of the
+											# dataset.  If we were working from image files, we could load them using
+											# matplotlib.pyplot.imread.  Note that each image must have the same size. For these
+											# images, we know which digit they represent: it is given in the 'target' of
+											# the dataset.
+											images_and_labels = list(zip(digits.images, digits.target))
+											for index, (image, label) in enumerate(images_and_labels[:4]):
+											    plt.subplot(2, 4, index + 1)
+											    plt.axis('off')
+											    plt.imshow(image, cmap=plt.cm.gray_r, interpolation='nearest')
+											    plt.title('Training: %i' % label)
+
+											# To apply a classifier on this data, we need to flatten the image, to
+											# turn the data in a (samples, feature) matrix:
+											n_samples = len(digits.images)
+											data = digits.images.reshape((n_samples, -1))
+
+											# Create a classifier: a support vector classifier
+											classifier = svm.SVC(gamma=0.001)
+
+											# We learn the digits on the first half of the digits
+											classifier.fit(data[:n_samples / 2], digits.target[:n_samples / 2])
+
+											# Now predict the value of the digit on the second half:
+											expected = digits.target[n_samples / 2:]
+											predicted = classifier.predict(data[n_samples / 2:])
+
+											print("Classification report for classifier %s:\n%s\n"
+											      % (classifier, metrics.classification_report(expected, predicted)))
+											print("Confusion matrix:\n%s" % metrics.confusion_matrix(expected, predicted))
+
+											images_and_predictions = list(zip(digits.images[n_samples / 2:], predicted))
+											for index, (image, prediction) in enumerate(images_and_predictions[:4]):
+											    plt.subplot(2, 4, index + 5)
+											    plt.axis('off')
+											    plt.imshow(image, cmap=plt.cm.gray_r, interpolation='nearest')
+											    plt.title('Prediction: %i' % prediction)
+
+											plt.show()
+
+										</pre>
+											
+									</p>
+									<br/>
 									
-										import pandas as pd
-										import numpy as np
-										from sklearn.cross_validation import train_test_split
-										from sklearn.ensemble import RandomForestClassifier
-										dataset = pd.read_csv('sampledata.csv', sep=',')
-										dataset=pd.get_dummies(dataset)
-										#print(dataset)
-										X, y = dataset.iloc[:20,1:], dataset.iloc[:20,:1]
-										#print(y)
-										X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=1)
-										clf = RandomForestClassifier(n_estimators=10)
-										yt=np.ravel(y_train)
-										clf = clf.fit(X_train, yt)
-										print(X_test.iloc[:4,:])
-										print(clf.predict(X_test.iloc[:4,:]))
-										print(y_test.iloc[:4,:])
 
-										
-								</p>
-								<br/>
-								
+									</p>
+								</section>	
 
-
-
-								<br/>
-								<p>
-									Each coefficient means how much on average (in inches) the height of players changes every year. For instance, Centers (on average) have be decreasing by 0.07 inches each year where as Point Guards’ height is increasing by 0.03 inches each year. Overall this show that Centers are decreasing the fastest, point guards are the only position getting taller and Small Forwards, Power forwards and shooting guards and getting slightly smaller.
-								</p>	
-								<br/>
-								
-								<img src="img/blog/bball1.png">
-								<br/>
-								<br/>
-								<h3>
-									Average Height by position
-								</h3>
-								<br/>
-								<br/>
-								<p>
-									Center position:
-									<img src="img/blog/bball2.png">
-								</p>
-								<br/>
-								<p>
-									Power Forward:
-									<img src="img/blog/bball3.png">
-								</p>
-								<br/>
-								<p>
-									Small Forward:
-									<img src="img/blog/bball4.png">
-								</p>
-								<br/>
-								<p>
-									Shooting Guard:
-									<img src="img/blog/bball5.png">
-								</p>
-								<br/>
-								<p>
-									Point Guard:
-									<img src="img/blog/bball6.png">
-								</p>
-								<br/>
-								<br/>
-								<br/>
-								<h3>
-									Average Wingspan of players drafted
-								</h3>
-								<br/>
-								<br/>
-								<p>
-									A term borrowed from the study of flying things, wingspan is the term used to describe the length of a basketball player's arms and hands. The player stands straight with both arms fully extended out to his sides; the measure from fingertips to fingertips is his "wingspan." A longer wingspan is a highly-prized commodity in basketball players -- longer arms allow players to "play taller" than they actually are, which is particularly helpful on defense -- blocking shots, rebounding, reaching into passing lanes for steals, etc.
+								<section id="gbm-section" class="portfolio-section">		
+									<h3>
+										Gradient Boosting
+									</h3>
 									<br/>
+									<p>
+										<b>Explanation: </b>
+										<br/>
+										<iframe style="height:280px;width:100%" src="https://www.youtube.com/embed/0Xc9LIb_HTw" frameborder="0" allowfullscreen></iframe>.
+									</p>
 									<br/>
-									Given that the wingspan of an individual is correlated to their height, it is not surprising that wingspan of players is also decreasing as their average height is also decreasing.
-									<img src="img/blog/bball7.png">
-								</p>
-								<br/>
-								<br/>
-								<br/>
-								<h3>
-									Average Weight of players drafted
-								</h3>
-								<br/>
-								<p>
-									On average players have are 15 pounds lighter over the 26 years of data we’ve assessed.
-									<img src="img/blog/bball8.png">
-								</p>
-								<br/>
-								<br/>
-								<br/>
-								<h3>
-									Average Body Fat of players drafted
-								</h3>
-								<br/>
-								<p>
-									Body fat (similar to weight is also decreasing).
-									<img src="img/blog/bball9.png">
-								</p>
-								<br/>
-								<br/>
-								<br/>
-								<h3>
-									Max Vertical of players drafted
-								</h3>
-								<br/>
-								<p>
-									Although the players have been getting on average smaller their jumping ability has been increasing over time as during the past 15 years the average Vertical has increasing (on average) about 5 inches. 
-								</p>
-								<br/>
-								<p>
-									Note: A straight line regression was not used as only one data point existed for each year prior to 1998.
-									<img src="img/blog/bball10.png">
-								</p>
-								<br/>
-								<br/>
-								<br/>
-								<h3>
-									Average Sprint of players drafted
-								</h3>
-								<br/>
-								<p>
-									A Basketball court is 94 feet long.  But a 3/4 court would be 70.5, and the test is standardized at 75 feet or 22.68 meters.  The 3/4 court sprint test is the distance from the end line to the opponents free throw line in College basketball.
-								</p>
-								<br/>
-								<p>
-									94 feet court minus 15 feet from free throw line to backboard minus 4 feet overhang = 75 feet.
-								</p>
-								<br/>
-								<p>
-									The 3/4 Basketball Court Sprint is one of many test at the NBA combine.  Like the NFL Combine, the vertical jump for explosive power is one of the tests.  Other tests include: Kneeling Power Ball Throw, Lane Agility Drill, Multi-Stage Hurdle and the Max Touch test.
-								</p>
-								<br/>
-								<p>
-									As can be seen the charts, the average sprint time of players has increased on average.
-									<img src="img/blog/bball11.png">
-								</p>
-								<br/>	
-								<br/>
-								<br/>
-								<h3>
-									Average Bench of players drafted
-								</h3>
-								<br/>
-								<p>
-									In a set weight maximum bench press test, the subject performs as many bench presses as they can at a particular weight. Tests such as this one are part of the NBA pre-draft camp fitness test and the NFL combine testing.
-									<img src="img/blog/bballbench.jpg">
-									The bench test for players has been (on average) constant over the years.
-									<img src="img/blog/bball12.png">
-									Given that the bench press is not directly related to player's versatility, this finding seems to be in-line with our hypothesis that NBA scouts are focused mostly on a player's versatility.
-								</p>
-								<br/>
-								<br/>
-								<br/>
-								<h3>
-									Average Agility of players drafted
-								</h3>
-								<br/>
-								<p>
-									The Lane Agility Drill run at the Pre-Draft Camp is pretty basic. The player starts on the baseline, sprints to the free throw line, slides (like defensive slides) to the opposite elbow, back peddles back to the baseline and slides back to the starting spot. The goal is to do it as fast as possible. The league measures the results in seconds.  As can be seen in the chart players are getting faster over time.
+									<p>
+										<b>Best at: </b>
+										<ol>
+											<li>
+												Apt at almost any machine learning problem
+											</li>
+											<li>
+												Search engines (solving the problem of learning to rank)
+											</li>
+										</ol>	
+									</p>
+									<br/>
+									<p>
+										<b>Pros: </b>
+										<ol>
+											<li>
+												It can approximate most nonlinear function
+											</li>
+											<li>
+												Best in class predictor
+											</li>
+											<li>
+												Automatically handles missing values
+											</li>
+											<li>
+												No need to transform any variable
+											</li>
+										</ol>	
+									</p>
+									<br/>
+									<p>
+										<b>Cons: </b>
+										<ol>
+											<li>
+												It can overfit if run for too many iterations
+											</li>
+											<li>
+												Sensitive to noisy data and outliers
+											</li>
+											<li>
+												Doesn’t work well without parameter tuning
+											</li>
+										</ol>	
+									</p>
+									<br/>
+									<p>
+										<b>Sample Python Code: </b>
+										<pre class="brush: python">
+											from sklearn.datasets import make_hastie_10_2
+											from sklearn.ensemble import GradientBoostingClassifier
 
-									<img src="img/blog/bball13.png">
-									<img src="img/blog/bball14.png">
-								</p>
-								<br/>
+											X, y = make_hastie_10_2(random_state=0)
+											X_train, X_test = X[:2000], X[2000:]
+											y_train, y_test = y[:2000], y[2000:]
+
+											clf = GradientBoostingClassifier(n_estimators=100, learning_rate=1.0,
+											    max_depth=1, random_state=0).fit(X_train, y_train)
+											#The number of weak learners (i.e. regression trees) is controlled by the parameter n_estimators; The size of each tree can be controlled either by setting the tree depth via max_depth or by setting the number of leaf nodes via max_leaf_nodes. The learning_rate is a hyper-parameter in the range (0.0, 1.0] that controls overfitting via shrinkage 
+											
+											clf.score(X_test, y_test)  
+
+										</pre>
+											
+									</p>
+									<br/>
+									
+
+									</p>
+								</section>	
+								
+								
+								<section id="randomforest-section" class="portfolio-section">		
+									<h3>
+										Random Forest
+									</h3>
+									<br/>
+									<p>
+										<b>Explanation: </b>
+										<br/>
+										<iframe style="height:280px;width:100%" src="https://www.youtube.com/embed/loNcrMjYh64" frameborder="0" allowfullscreen></iframe>
+									</p>
+									<br/>
+									<p>
+										<b>Best at: </b>
+										<ol>
+											<li>
+												Apt at almost any machine learning problem
+											</li>
+											<li>
+												Bioinformatics
+											</li>
+										</ol>	
+									</p>
+									<br/>
+									<p>
+										<b>Pros: </b>
+										<ol>
+											<li>
+												Can work in parallel
+											</li>
+											<li>
+												Seldom overfits
+											</li>
+											<li>
+												Automatically handles missing values
+											</li>
+											<li>
+												No need to transform any variable
+											</li>
+											<li>
+												No need to tweak parameters
+											</li>
+											<li>
+												Can be used by almost anyone with excellent results
+											</li>
+										</ol>	
+									</p>
+									<br/>
+									<p>
+										<b>Cons: </b>
+										<ol>
+											<li>
+												Difficult to interpret
+											</li>
+											<li>
+												Weaker on regression when estimating values at the extremities of the distribution of response values
+											</li>
+											<li>
+												Biased in multiclass problems toward more frequent classes
+											</li>
+										</ol>	
+									</p>
+									<br/>
+									<p>
+										<b>Sample Python Code: </b>
+										<pre class="brush: python">
+											import pandas as pd
+											import numpy as np
+											from sklearn.cross_validation import train_test_split
+											from sklearn.ensemble import RandomForestClassifier
+											from sklearn.metrics import r2_score
+											import matplotlib.pyplot as plt
+
+											#Assuming your data is in data.csv
+											
+											dataset = pd.read_csv('data.csv', sep=',')
+											
+											dataset.fillna(0, inplace=True)
+											
+											#For turning you categorical variables into dummy variables (sklean can only deal with continuous variables)
+
+											dataset=pd.get_dummies(dataset)
+
+											#assuming your classification is in the last column and your predictors are in the other columns
+											X, y = dataset.iloc[:,1:], dataset.iloc[:,:1]
+
+											#for creating a split test/traing set where 20% of the original data is in the test set and the rest is in training
+											X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=1)
+											
+											#Random Forest
+											
+											clf = RandomForestClassifier(n_estimators=10)
+											yt=np.ravel(y_train)
+											clf = clf.fit(X_train, yt)
+											y_predict=clf.predict(X_test)
+											print("Rsquared for Random Forest: ",r2_score(y_test, y_predict))
+										</pre>
+											
+									</p>
+									<br/>
+									
+
+									</p>
+								</section>
+
+								
 								<br/>
 								<br/>
 								
@@ -380,8 +471,17 @@
 									<span>Entrepreneur & <br/>Product Manager</span>
 								</div>
 								<p>
-									I am an Entrepreneur, Product Manager and UC Berkeley Graduate. My passion for technology and interest in design & user experience have inspired me to build digital products that users love. I've launched numerous products from idea, to execution and acquiring tens of thousands of users. I've also won a couple of awards along the way. You can check out some of my products in the <a href="file:///Users/MohammadHossein/Documents/personal%20site/tile-v1.0/personal%20site/index.html#portfolio-section" style="color:#0eb57d"><b>Portfolio Section</b></a>. 
+									I am an Entrepreneur, Product Manager and UC Berkeley Graduate. My passion for technology and interest in design & user experience have inspired me to build digital products that users love. I've launched numerous products from idea, to execution and acquiring tens of thousands of users. I've also won a couple of awards along the way. You can check out some of my products in the <a href="index.html#portfolio-section" style="color:#0eb57d"><b>Portfolio Section</b></a>. 
 								</p>
+							</div>
+						</div>
+						<div class="col s12 single-sidebar w-block z-depth-1 shadow-change pd-30">
+							<div class="sidebar-title">
+								Navigate to Section
+							</div>
+							<div class="category-content">
+								<a href="#0" onclick=$('#svm-section').animatescroll();>Support Vector Machine</a>
+								<a href="#0" onclick=$('#randomforest-section').animatescroll();>Random Forest</a>
 							</div>
 						</div>
 						<!-- <div class="col s12 single-sidebar w-block z-depth-1 shadow-change pdt-30 pdr-30 pdb-40 pdl-30">
@@ -537,6 +637,8 @@
 		<script type="text/javascript" src="js/wow.js"></script>
 		<script src="http://maps.google.com/maps/api/js?sensor=true"></script>
 		<script type="text/javascript" src="js/custom.js"></script>
+		<!-- Finally, to actually run the highlighter, you need to include this JS on your page -->
+		
 		<script>
 			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
