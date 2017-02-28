@@ -28,6 +28,19 @@
 	17. Color Scheme Selector
 
 ======================================================== */
+.fixme{
+	-webkit-transition: none !important;
+	-moz-transition: none !important;
+	-o-transition: none !important;
+	transition: none !important;
+}
+
+@media screen and (max-width: 700px) {
+    .fixme {
+        display: none !important;
+    }
+}
+
 a.back-to-top {
 	display: none;
 	width: 60px;

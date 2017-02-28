@@ -357,7 +357,7 @@
 									<p>
 										<b>Explanation: </b>
 										<br/>
-										<iframe style="height:280px;width:100%" src="https://www.youtube.com/embed/0Xc9LIb_HTw" frameborder="0" allowfullscreen></iframe>.
+										<iframe style="height:280px;width:100%" src="https://www.youtube.com/embed/sRktKszFmSk" frameborder="0" allowfullscreen></iframe>.
 									</p>
 									<br/>
 									<p>
@@ -442,11 +442,11 @@
 										<br/>
 										<iframe style="height:280px;width:100%" src="https://www.youtube.com/embed/ix6IvwbVpw0" frameborder="0" allowfullscreen></iframe>
 										<br/><br/>
-										Zhaojun Zhang, a Software Engineer from Coursera, describes the differences between Adaboost and Gradient boosting quite well. As he mentions Both methods use a set of weak learners. They try to boost these weak learners into a strong learner. I assume that the strong learner is additive by the weak learners.
+										Zhaojun Zhang, a Software Engineer from Coursera, describes the differences between Adaboost and Gradient boosting quite well. As he mentions, Both methods use a set of weak learners. They try to boost these weak learners into a strong learner. Assume that the strong learner is additive by the weak learners.
 										<br/><br/>
 										Gradient boosting generates learners during the learning process. It build first learner to predict the values/labels of samples, and calculate the loss (the difference between the outcome of the first learner and the real value). It will build a second learner to predict the loss after the first step. The step continues to learn the third, fourth … until certain threshold.
 										<br/><br/>
-										Adaboost requires users specify a set of weak learners (alternatively, it will randomly generate a set of weak learner before the real learning process). It will learn the weights of how to add these learners to be a strong learner. The weight of each learner is learned by whether it predicts a sample correctly or not. If a learner is mispredict a sample, the weight of the learner is reduced a bit. It will repeat such process until converge.
+										Adaboost requires users specify a set of weak learners (alternatively, it will randomly generate a set of weak learner before the real learning process). It will learn the weights of how to add these learners to be a strong learner. The weight of each learner is learned by whether it predicts a sample correctly or not. If a learner mis-predicts a sample, the weight of the learner is reduced a bit. It will repeat such process until converge.
 									</p>
 									<br/>
 									<p>
@@ -908,6 +908,76 @@
 											ax.w_zaxis.set_ticklabels([])
 
 											plt.show()
+
+										</pre>
+											
+									</p>
+									<br/>
+									
+
+									</p>
+								</section>
+
+								<section id="lda-section" class="portfolio-section">		
+									<h3>
+										(LDA) Linear Discriminant Analysis 
+									</h3>
+									<br/>
+									<p>
+										<b>Explanation: </b>
+										<br/>
+										<iframe style="height:280px;width:100%" src="https://www.youtube.com/embed/azXCzI57Yfc" frameborder="0" allowfullscreen></iframe>
+										<br/><br/>
+										Both LDA and PCA are linear transformation techniques: LDA is a supervised whereas PCA is unsupervised (ignores class labels). 
+										
+									</p>
+									<br/>
+									<p>
+										<b>Best at: </b>
+										<ol>
+											<li>
+												Face recognition
+											</li>
+											<li>
+												Reducing dimensions of the dataset
+											</li>
+
+										</ol>	
+									</p>
+									<br/>
+									<p>
+										<b>Pros: </b>
+										<ol>
+											<li>
+												Can reduce data dimensionality
+											</li>
+
+										</ol>	
+									</p>
+									<br/>
+									<p>
+										<b>Cons: </b>
+										<ol>
+											<li>
+												LDA produces at most C-1 feature projections, where is C is the number of class labels
+											</li>
+											<li>
+												LDA is a parametric method (it assumes unimodal Gaussian likelihoods)
+											</li>
+										</ol>	
+									</p>
+									<br/>
+									<p>
+										<b>Sample Python Code: </b>
+										<pre class="brush: python; toolbar: false;">
+											import numpy as np
+											from sklearn.lda import LDA
+											X = np.array([[-1, -1], [-2, -1], [-3, -2], [1, 1], [2, 1], [3, 2]])
+											y = np.array([1, 1, 1, 2, 2, 2])
+											clf = LDA()
+											clf.fit(X, y)
+
+											print(clf.predict([[-0.8, -1]]))
 
 										</pre>
 											
@@ -1400,7 +1470,7 @@
 								</p>
 							</div>
 						</div>
-						<div class="col s12 single-sidebar w-block z-depth-1 shadow-change pd-30">
+						<div class="fixme col s12 single-sidebar w-block z-depth-1 shadow-change pd-30">
 							<div class="sidebar-title">
 								Navigate to Section
 							</div>
@@ -1413,6 +1483,7 @@
 								<a href="#0" onclick=$('#knn-section').animatescroll();>K-nearest Neighbors</a>
 								<a href="#0" onclick=$('#svd-section').animatescroll();>SVD</a>
 								<a href="#0" onclick=$('#pca-section').animatescroll();>PCA</a>
+								<a href="#0" onclick=$('#lda-section').animatescroll();>LDA</a>
 								<a href="#0" onclick=$('#cb-section').animatescroll();>Collaborative Filtering</a>
 								<a href="#0" onclick=$('#km-section').animatescroll();>K-means Clustering</a>
 								<a href="#0" onclick=$('#logr-section').animatescroll();>Logistic Regression</a>
@@ -1545,6 +1616,24 @@
 				} else {
 					$('a.back-to-top').fadeOut('slow');
 				}
+			});
+
+			var fixmeTop = $('.fixme').offset().top;
+			$(window).scroll(function() {
+			    var currentScroll = $(window).scrollTop();
+			    if (currentScroll >= fixmeTop) {
+			        $('.fixme').css({
+			            position: 'fixed',
+			            top: '0',
+			    		width: '23%'
+			        });
+			    } else {
+			        $('.fixme').css({
+			            position: '',
+			            width: '',
+			            top: ''
+			        });
+			    }
 			});
 
 			$('a.back-to-top').click(function() {
